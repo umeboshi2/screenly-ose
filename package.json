@@ -33,6 +33,7 @@
   "homepage": "https://github.com/Screenly/screenly-ose#readme",
   "dependencies": {
     "backbone": "^1.3.3",
+    "base64-js": "^1.3.0",
     "bootstrap": "^4.1.3",
     "bootstrap-datepicker": "^1.8.0",
     "bootstrap-timepicker": "^0.5.2",
