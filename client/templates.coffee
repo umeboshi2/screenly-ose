@@ -187,7 +187,84 @@ subscribeFormTemplate = tc.renderable ->
       tc.input name:"b_#{user}_#{listID}", tabindex:"-1", type:"text"
     tc.div "#mc-embedded-subscribe.button.btn.btn-outline-secondary",
     name:"subscribe", type:"submit", value:"Subscribe"
-    
+
+indexBody = tc.renderable (model) ->
+  tc.div "#request-error.navbar.fixed-top"
+  tc.div ".navbar.navbar-expand-lg.fixed-top.bg-primary", ->
+    tc.div ".container", ->
+      tc.a ".brand", href:'/', ->
+        tc.img src:"static/img/screenly_ose_logo.png"
+      tc.ul ".nav.float-right", ->
+        if not model.up_to_date
+          tc.li ".update-available", ->
+            tc.a href:"http://www.screenlyapp.com/ose.html#upgrade", ->
+              tc.i ".fas.fa-arrow-circle-down"
+              tc.text "Update Available"
+        tc.li ->
+          tc.a href:"/settings", ->
+            tc.i ".fas.fa-cogs"
+            tc.text "Settings"
+        tc.li ".divider-vertical"
+        tc.li ->
+          tc.a href:"/system_info", ->
+            tc.i ".fas.fa-tasks"
+            tc.text "System Info"
+  tc.div ".container", ->
+    tc.div ".row", ->
+      tc.div ".col-12", ->
+        tc.h1 ".page-header", ->
+          tc.div ".float-right", ->
+            btnClasses = ".btn.btn-outline-secondary"
+            tc.a "#previous-asset-button#{btnClasses}", href:"#", ->
+              tc.i ".fas.fa-fast-backward"
+              tc.text "Previous Asset"
+            tc.a "#next-asset-button#{btnClasses}", href:"#", ->
+              tc.i ".fas.fa-fast-forward"
+              tc.text "Next Asset"
+            tc.a "#add-asset-button.btn.btn-primary", href:"#", ->
+              tc.i ".fas.fa-plus"
+              tc.text "Add Asset"
+          tc.text "Schedule Overview"
+        if model.player_name
+          tc.h2 model.player_name
+      tc.div "#assets.row", ->
+        tc.div ".col-12", ->
+          tc.section ->
+            tc.div ".header.bg-primary", "Active assets"
+            tc.table ".table.table-striped.active-table", ->
+              tc.thead style:"display:none", ->
+                tc.tr ->
+                  tc.th ".asset_row_name", "Name"
+                  tc.th style:"width:21%", "Start"
+                  tc.th style:"width:21%", "End"
+                  tc.th style:"width:13%"
+                  tc.th style:"width:7%"
+              tc.tbody "#active-assets"
+        tc.div ".col-12", ->
+          tc.section ->
+            tc.div ".header.bg-primary", "Inactive Assets"
+      tc.hr()
+      tc.div ".container", ->
+        tc.div ".row", ->
+          tc.div ".col-6", ->
+            tc.span ->
+              tc.text "Want to get more out of Screenly?"
+              href = "http://www.screenlyapp.com/?utm_source=Screenly-OSE&amp;utm_medium=root-page&amp;utm_campaign=OSE" # noqa
+              tc.a ".brand", href:href, target:"_blank", ->
+                tc.strong "Try Screenly Pro"
+          tc.div ".col-6", ->
+            tc.span ->
+              tc.a "#subscribe-form-template", href:"javascript://",
+              data:html:"true", data:trigger:"focus", data:placement:"top", ->
+                tc.strong "Get the latest Screenly news directly in your mailbox." # noqa
+    tc.div "#footer", ->
+      tc.div ".container", ->
+        tc.div ".copy", ->
+          tc.text "&copy; Screenly Inc."
+        tc.a "#screenly-logo", href:"http://screenly.io/", target:"_blank", ->
+          tc.text "Screenly.io"
+          
+                        
 
 export {
   assetRowTemplate
@@ -196,4 +273,5 @@ export {
   requestErrorTemplate
   assetModalTemplate
   subscribeFormTemplate
+  indexBody
   }
