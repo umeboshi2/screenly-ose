@@ -13,7 +13,7 @@ $().ready ->
     $.post "api/v1/backup"
     .done  (data, e) ->
       if (data)
-        window.location = "static_with_mime/" + data + "?mime=application/x-tgz"
+        window.location = "static_with_mime/#{data}?mime=application/x-tgz"
 
     .fail  (data, e) ->
       $('#request-error .alert').addClass 'alert-danger'

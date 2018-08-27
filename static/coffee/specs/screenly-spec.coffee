@@ -7,8 +7,8 @@ describe "Screenly Open Source", ->
 
   describe "date_to", ->
 
-    test_date = new Date(2014, 5, 6, 14, 20, 0, 0);
-    a_date = Screenly.date_to(test_date);
+    test_date = new Date(2014, 5, 6, 14, 20, 0, 0)
+    a_date = Screenly.date_to(test_date)
 
     it "should format date and time as 'MM/DD/YYYY hh:mm:ss A'", ->
       expect(a_date.string()).toBe '06/06/2014 02:20:00 PM'
@@ -26,8 +26,8 @@ describe "Screenly Open Source", ->
       it "should exist", ->
         expect(Screenly.Asset).toBeDefined()
 
-      start_date = new Date(2014, 4, 6, 14, 20, 0, 0);
-      end_date = new Date();
+      start_date = new Date(2014, 4, 6, 14, 20, 0, 0)
+      end_date = new Date()
       end_date.setMonth(end_date.getMonth() + 2)
       asset = new Screenly.Asset({
         asset_id: 2
@@ -86,7 +86,8 @@ describe "Screenly Open Source", ->
 
         expect(asset.get 'is_enabled').toBe false
         expect(asset.get 'name').toBe 'Test 2'
-        expect(asset.get('start_date').toISOString()).toBe (new Date(2011, 4, 6, 14, 20, 0, 0)).toISOString()
+        expect(asset.get('start_date').toISOString()).toBe(
+          (new Date(2011, 4, 6, 14, 20, 0, 0)).toISOString())
         expect(asset.get 'uri').toBe "http://www.wireload.net"
 
 

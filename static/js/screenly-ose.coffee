@@ -41,7 +41,7 @@ viduris   = ('rtsp rtmp'.split ' ')
 domains = [ [('www.youtube.com youtu.be'.split ' '), 'youtube_asset']]
 
 
-get_mimetype = (filename) =>
+get_mimetype = (filename) ->
   scheme = (_.first filename.split ':').toLowerCase()
   match = scheme in viduris
   if match then return 'streaming'
@@ -65,7 +65,7 @@ Backbone.emulateJSON = off
 API.Asset = class Asset extends Backbone.Model
   idAttribute: "asset_id"
   fields: 'name mimetype uri start_date end_date duration'.split ' '
-  defaults: =>
+  defaults: ->
     name: ''
     mimetype: 'webpage'
     uri: ''
@@ -80,8 +80,8 @@ API.Asset = class Asset extends Backbone.Model
   active: =>
     if @get('is_enabled') and @get('start_date') and @get('end_date')
       at = now()
-      start_date = new Date(@get('start_date'));
-      end_date = new Date(@get('end_date'));
+      start_date = new Date(@get('start_date'))
+      end_date = new Date(@get('end_date'))
       return start_date <= at <= end_date
     else
       return false
