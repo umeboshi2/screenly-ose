@@ -160,10 +160,40 @@ assetModalTemplate = tc.renderable (model) ->
             tc.input "#save-asset.btn.btn-primary", type:"submit", value:"Save"
 
 
+subscribeFormTemplate = tc.renderable ->
+  user = "adb4f752497b0d86b3b1b79d7"
+  listID = "5c47388076"
+  host = "wireload.us1.list-manage.com"
+  actionURI = "//#{host}/subscribe/post?u=#{user}&amp;id=#{listID}"
+  tc.form ".validate", action:actionURI, method:"post",
+  name:"mc-embedded-subscribe-form",
+  style:"margin-bottom:5px", target:"_blank", ->
+    tc.div ".mc-field-group.form-group", ->
+      tc.label "for":"mce-EMAIL", ->
+        tc.text "Email Address"
+        tc.span ".asterisk", "*"
+      tc.input "#mce-EMAIL.required.email.form-control", name:"EMAIL",
+      required:"required", type:"email"
+    tc.div ".mc-field-group.form-group", ->
+      tc.label "for":"mce-FNAME", "First Name"
+      tc.input "#mce-FNAME.form-control", name:"FNAME", type:"text"
+    tc.div ".mc-field-group.form-group", ->
+      tc.label "for":"mce-LNAME", "Last Name"
+      tc.input "#mce-LNAME.form-control", name:"LNAME", type:"text"
+    comment = " real people should not fill this in and expect good things"
+    comment = "#{comment} - do not remove this or risk form bot signups "
+    tc.comment comment
+    tc.div hidden:"true", style:"position absolute; left -5000px;", ->
+      tc.input name:"b_#{user}_#{listID}", tabindex:"-1", type:"text"
+    tc.div "#mc-embedded-subscribe.button.btn.btn-outline-secondary",
+    name:"subscribe", type:"submit", value:"Subscribe"
+    
+
 export {
   assetRowTemplate
   confirmDeleteTemplate
   processingMessageTemplate
   requestErrorTemplate
   assetModalTemplate
+  subscribeFormTemplate
   }
