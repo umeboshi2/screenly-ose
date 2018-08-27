@@ -44,7 +44,7 @@
     "jquery-ui": "^1.12.1",
     "moment": "^2.22.2",
     "popper.js": "^1.14.4",
-    "teacup": "^2.0.0",
+    "teacup": "github:umeboshi2/teacup#aria-states-props",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
