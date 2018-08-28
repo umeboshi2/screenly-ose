@@ -35,7 +35,8 @@ before_script:
   - curl https://www.screenly.io/upload/big_buck_bunny_720p_10mb.flv > /tmp/video.flv
   - export DISPLAY=:99.0
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16
-  - python tests/rtmplite/rtmp.py -r /tmp/ &
+  #- python tests/rtmplite/rtmp.py -r /tmp/ &
+  - coffee node-rtsp-rtmp-server/server.coffee
   - sleep 3
   - python server.py &
   - sleep 3 # give xvfb some time to start
