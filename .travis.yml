@@ -18,6 +18,8 @@ install:
   - pip install -U pip
   - pip install -r requirements.txt
   - pip install -r requirements.dev.txt
+  - nvm install 8.11.3
+  - nvm use 8.11.3
   - node --version
 before_script:
   - mkdir -p ~/.screenly ~/.config/uzbl/ ~/screenly_assets
