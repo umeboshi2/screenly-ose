@@ -49,9 +49,11 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
+    "coffee-loader": "^0.9.0",
     "coffeescript": "^2.3.1",
     "css-loader": "^1.0.0",
     "favicons-webpack-plugin": "0.0.9",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.2",
     "node-rtsp-rtmp-server": "^0.4.0",
     "webpack": "^4.17.1",
