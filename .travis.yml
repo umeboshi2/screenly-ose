@@ -24,6 +24,7 @@ install:
   - npm install -g coffeescript
 before_script:
   - git clone https://github.com/umeboshi2/node-rtsp-rtmp-server.git
+  - pushd node-rtsp-rtmp-server && npm install && popd
   - mkdir -p ~/.screenly ~/.config/uzbl/ ~/screenly_assets
   - cp ansible/roles/screenly/files/uzbl-config ~/.config/uzbl/config-screenly
   - cp ansible/roles/screenly/files/screenly.conf ~/.screenly/
