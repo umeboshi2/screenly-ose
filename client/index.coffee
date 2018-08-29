@@ -5,7 +5,7 @@ import Backbone from 'backbone'
 import Marionette from 'backbone.marionette'
 
 import 'bootstrap'
-import 'font-awesome/scss/font-awesome'
+import 'font-awesome/scss/font-awesome.scss'
 
 import App from './app'
 
