@@ -23,6 +23,7 @@ install:
   - node --version
   - npm install -g coffeescript
 before_script:
+  # FIXME, a forked git repo is needed to set options
   - git clone https://github.com/umeboshi2/node-rtsp-rtmp-server.git
   - pushd node-rtsp-rtmp-server && npm install && popd
   - mkdir -p ~/.screenly ~/.config/uzbl/ ~/screenly_assets
