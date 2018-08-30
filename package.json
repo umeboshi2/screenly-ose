@@ -48,6 +48,9 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-dynamic-import-webpack": "^1.0.2",
+    "babel-preset-env": "^1.7.0",
     "coffee-loader": "^0.9.0",
     "coffeescript": "^2.3.1",
     "css-loader": "^1.0.0",
