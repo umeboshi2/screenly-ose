@@ -40,7 +40,8 @@ processingMessageTemplate = tc.renderable ->
 requestErrorTemplate = tc.renderable ->
   tc.div ".container", ->
     tc.div ".alert.alert-danger", ->
-      tc.button ".close", data:dismiss:"alert", type:"button", "&times"
+      tc.button ".close", data:dismiss:"alert", type:"button", ->
+        tc.raw "&times"
       msg = "The operation failed. Please reload the page and try again."
       tc.span ".msg", msg
 
@@ -115,7 +116,9 @@ assetModalAddForm = tc.renderable ->
           tc.label ".col-4.col-form-label", "Duration"
           tc.div ".col-7.controls", ->
             tc.input ".form-control", name:"duration",
-            type:"number", "seconds &nbsp"
+            type:"number", ->
+              tc.text "seconds"
+              tc.raw "&nbsp"
         tc.div ".advanced-accordion.accordion",  ->
           tc.div ".accordion-group", ->
             tc.div ".accordion-heading", ->
@@ -260,7 +263,8 @@ indexBody = tc.renderable (model) ->
     tc.div "#footer", ->
       tc.div ".container", ->
         tc.div ".copy", ->
-          tc.text "&copy; Screenly Inc."
+          tc.raw "&copy; "
+          tc.text "Screenly Inc."
         tc.a "#screenly-logo", href:"http://screenly.io/", target:"_blank", ->
           tc.text "Screenly.io"
           
