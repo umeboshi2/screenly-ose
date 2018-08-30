@@ -112,7 +112,7 @@ WebPackConfig =
   devtool: 'source-map'
   mode: BuildEnvironment
   entry:
-    index: './client/index.coffee'
+    main: './client/main'
   output: WebPackOutput
   plugins: commonPlugins
   module:
