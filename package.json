@@ -11,7 +11,6 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --mode production --progress --colors",
     "watch": "webpack --config webpack.config.coffee -d --progress --colors --watch",
-    "starthot": "NODE_ENV=development webpack-dev-server --hot --mode development",
     "start": "NODE_ENV=development webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
