@@ -57,6 +57,7 @@ scheduler = None
 # we want to use /dev/urandom for creating device_id
 random_choice = random.SystemRandom().choice
 
+
 def sigusr1(signum, frame):
     """
     The signal interrupts sleep() calls, so the currently
