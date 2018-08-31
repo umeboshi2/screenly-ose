@@ -4,7 +4,6 @@
 from datetime import datetime, timedelta
 from os import path, getenv, utime, system
 from platform import machine
-from random import shuffle
 from threading import Thread
 
 from mixpanel import Mixpanel, MixpanelException
@@ -55,6 +54,8 @@ db_conn = None
 
 scheduler = None
 
+# we want to use /dev/urandom for creating device_id
+random_choice = random.SystemRandom().choice
 
 def sigusr1(signum, frame):
     """
@@ -229,7 +230,7 @@ def generate_asset_list():
     logging.debug('generate_asset_list deadline: %s', deadline)
 
     if settings['shuffle_playlist']:
-        shuffle(playlist)
+        random.shuffle(playlist)
 
     return playlist, deadline
 
@@ -355,34 +356,31 @@ def check_update():
     else:
         last_update = None
 
-    if not path.isfile(device_id_file):
-        namechars = string.ascii_lowercase + string.digits
-        device_id = ''.join(random.choice(namechars) for _ in range(15))
-        with open(device_id_file, 'w') as f:
-            f.write(device_id)
-    else:
-        with open(device_id_file, 'r') as f:
-            device_id = f.read()
+    # We want to change the device_id each time an asset
+    # is played on the viewer
+    namechars = string.ascii_lowercase + string.digits
+    device_id = ''.join(random_choice(namechars) for _ in range(15))
 
     logging.debug('Last update: %s' % str(last_update))
 
     git_branch = sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip()
     git_hash = sh.git('rev-parse', '--short', 'HEAD').strip()
     yesterday = datetime.now() - timedelta(days=1)
+    # use analytics more often for better tracking, ...
+    if not settings['analytics_opt_out'] and not is_ci():
+        mp = Mixpanel('d18d9143e39ffdb2a4ee9dcc5ed16c56')
+        try:
+            mp.track(device_id, 'Version', {
+                'Branch': str(git_branch),
+                'Hash': str(git_hash),
+            })
+        except MixpanelException:
+            pass
+        except AttributeError:
+            pass
+
+    # but we want to actually do the update check daily.
     if last_update is None or last_update < yesterday:
-
-        if not settings['analytics_opt_out'] and not is_ci():
-            mp = Mixpanel('d18d9143e39ffdb2a4ee9dcc5ed16c56')
-            try:
-                mp.track(device_id, 'Version', {
-                    'Branch': str(git_branch),
-                    'Hash': str(git_hash),
-                })
-            except MixpanelException:
-                pass
-            except AttributeError:
-                pass
-
         if remote_branch_available(git_branch):
             latest_sha = fetch_remote_hash(git_branch)
 
