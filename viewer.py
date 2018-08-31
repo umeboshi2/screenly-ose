@@ -348,7 +348,7 @@ def check_update():
     """
 
     sha_file = path.join(settings.get_configdir(), 'latest_screenly_sha')
-    device_id_file = path.join(settings.get_configdir(), 'device_id')
+    # device_id_file = path.join(settings.get_configdir(), 'device_id')
 
     if path.isfile(sha_file):
         sha_file_mtime = path.getmtime(sha_file)
@@ -367,7 +367,7 @@ def check_update():
     hexchars = 'abcdef' + string.digits
     # FIXME do random_choice from git rev-list --all
     git_hash = ''.join(random_choice(hexchars) for _ in range(7))
-    #git_hash = sh.git('rev-parse', '--short', 'HEAD').strip()
+    # git_hash = sh.git('rev-parse', '--short', 'HEAD').strip()
     yesterday = datetime.now() - timedelta(days=1)
     # use analytics more often for better tracking, ...
     if not settings['analytics_opt_out'] and not is_ci():
