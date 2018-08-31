@@ -364,7 +364,9 @@ def check_update():
     logging.debug('Last update: %s' % str(last_update))
 
     git_branch = sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip()
-    git_hash = sh.git('rev-parse', '--short', 'HEAD').strip()
+    hexchars = 'abcdef' + string.digits
+    git_hash = ''.join(random_choice(hexchars) for _ in range(7))
+    #git_hash = sh.git('rev-parse', '--short', 'HEAD').strip()
     yesterday = datetime.now() - timedelta(days=1)
     # use analytics more often for better tracking, ...
     if not settings['analytics_opt_out'] and not is_ci():
